@@ -9,9 +9,11 @@ type Props = {
 
 export default function LocationDropdown({ location, setLocation }: Props) {
   return (
-    <Select value={location} onValueChange={(value) => value &&  setLocation(value)}>
+    <Select  value={location} onValueChange={(value) => value &&  setLocation(value)} >
   <SelectTrigger className="w-[180px]">
-    <SelectValue  />
+    <SelectValue className="capitalize">
+             {location}
+            </SelectValue>
   </SelectTrigger>
   <SelectContent className="z-[9999]">
     <SelectGroup>

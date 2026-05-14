@@ -9,13 +9,15 @@ export default function MapTypeDropDown({mapType,setMaptype}: Props) {
   return (
      <Select value={mapType} onValueChange={(value) => value &&  setMaptype(value)}>
       <SelectTrigger className="w-[180px]">
-        <SelectValue  />
+        <SelectValue className="capitalize">
+          {mapType.split("_")[0]}
+         </SelectValue>
       </SelectTrigger>
       <SelectContent className="z-[9999]">
         <SelectGroup>
         {mapTypes.map((map) => (
-          <SelectItem key={map} value={map}>
-            {map}
+          <SelectItem key={map} value={map} className="capitalize">
+            {map.split("_")[0]}
           </SelectItem>
         ))}
         </SelectGroup>
@@ -26,11 +28,8 @@ export default function MapTypeDropDown({mapType,setMaptype}: Props) {
 
 const mapTypes = [
   "clouds_new",
-  "clouds_old",
   "precipitation_new",
-  "precipitation_old",
   "pressure_new",
-  "pressure_old",
   "wind_new",
-  "wind_old"
+  "temp_new",
 ]
