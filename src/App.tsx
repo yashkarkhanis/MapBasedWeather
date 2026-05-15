@@ -16,6 +16,7 @@ import CurrentWeatherSkeleton from "./components/skeletons/CurrentWeatherSkeleto
 import HourlySkeleton from "./components/skeletons/HourlySkeleton"
 import DailySkeleton from "./components/skeletons/DailySkeleton"
 import AddditionalInfoSkeleton from "./components/skeletons/AddditionalInfoSkeleton"
+import SidePanel from "./components/SidePanel"
 
 function App() {
   const [coordinates, setCoords] = useState<Coords>({ lat: 40, lon: 25 })
@@ -36,6 +37,7 @@ function App() {
 
 
   return (
+  <>
     <div className="flex flex-col gap-8">
       <div className="flex gap-8">
         <div className="flex gap-4">
@@ -66,7 +68,8 @@ function App() {
         <AdditionalInfo coords={coords} />
       </Suspense>
     </div>
-
+<SidePanel  coords={coords}/> 
+  </>
   )
 }
 

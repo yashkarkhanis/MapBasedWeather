@@ -1,5 +1,6 @@
 import { weatherSchema } from "./schemas/weatherSchema"
 import { GeocodeSchema } from "./schemas/geoCodeShema"
+import {airPollutionSchema} from "./schemas/airPollutionSchema"
 
 const API_KEY = import.meta.env.VITE_API_KEY
 export async function getWeather({lat,lon}:{lat:number,lon:number}) {
@@ -15,5 +16,14 @@ export async function getGeoCode(location:string) {
     const data = await res.json()
     console.log(data)
     return GeocodeSchema.parse(data)
+    
+}
+
+
+export async function getAirPollution({lat,lon}:{lat:number,lon:number}) {
+    const res = await fetch(`http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+    const data = await res.json()
+    console.log(data)
+    return airPollutionSchema.parse(data)
     
 }
