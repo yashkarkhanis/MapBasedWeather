@@ -50,7 +50,7 @@ function App() {
         </div>
       </div>
     <div className="relative">
-      <Map coords={coords} onMapClick={onMapClick} mapType={mapType} />
+      {/* <Map coords={coords} onMapClick={onMapClick} mapType={mapType} /> */}
       <MapLegend mapType={mapType}/>
     </div>
       <Suspense fallback={<CurrentWeatherSkeleton />} >
