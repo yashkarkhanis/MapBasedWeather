@@ -60,12 +60,12 @@ const rows =[
   ]
 
     return (
-    <Cards title='Additional Weather Info' childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <Cards title='Additional Weather Info'  childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8">
         {rows.map(({label,value,Icon})=>(
             <div className="flex justify-between" key={label}>
                 <div className='flex gap-4'>
                 <span className='text-gray-500'>{label}</span>
-                <Icon className="size-8 invert"></Icon>
+                <Icon className="size-8 "></Icon>
                 </div>
                 <span>
                     <FormatComponent value={label} number={value}/>
@@ -83,7 +83,7 @@ function FormatComponent({ value, number }: { value: string; number: number }) {
       minute: "2-digit",
       hour12: true,
     })
-    if(value === "Wind Direction") return <UpArrow className='size-8 invert' style={{transform:`rotate${number}deg`}}/>
+    if(value === "Wind Direction") return <UpArrow className='size-8 ' style={{transform:`rotate${number}deg`}}/>
   return number
 }
   

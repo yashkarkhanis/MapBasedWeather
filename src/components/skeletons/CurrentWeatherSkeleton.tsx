@@ -8,7 +8,7 @@ type Props = {}
 export default function CurrentWeatherSkeleton({}: Props) {
   return (
       <Cards
-               title="Current Weather" childrenClassName='flex flex-col items-center gap-6'>
+               title="Current Weather" childrenClassName='flex flex-col items-center gap-6 2xl:justify-between'>
                <div className='flex flex-col gap-2 items-center'>
                   <Skeleton className='w-30 h-15' />
                    <Skeleton className='size-14 rounded-full' />
