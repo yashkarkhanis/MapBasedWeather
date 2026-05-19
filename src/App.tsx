@@ -17,11 +17,12 @@ import HourlySkeleton from "./components/skeletons/HourlySkeleton"
 import DailySkeleton from "./components/skeletons/DailySkeleton"
 import AddditionalInfoSkeleton from "./components/skeletons/AddditionalInfoSkeleton"
 import SidePanel from "./components/SidePanel"
-
+import Hamburger from "/src/assets/Hamburger.svg?react"
 function App() {
   const [coordinates, setCoords] = useState<Coords>({ lat: 40, lon: 25 })
   const [location, setLocation] = useState<string>("Tokyo")
   const [mapType, setMaptype] = useState<string>("clouds_new")
+  const [isSidePanelOpen, setIsSidePanelOpen] = useState<boolean>(false)
 
   const onMapClick = (lat: number, lon: number) => {
     setCoords({ lat, lon })
@@ -38,37 +39,50 @@ function App() {
 
   return (
   <>
-    <div className="flex flex-col gap-8">
-      <div className="flex gap-8">
-        <div className="flex gap-4">
+    <div className="flex flex-col gap-8 w-full lg:w-[calc(100dvw-var(--sidebar-width))] 2xl:h-screen p-8 ">
+      <div className="flex flex-col gap-4 xs:flex-row xs-gap-8">
+        <div className="flex flex-col md:flex-row gap-2 md:gap-4">
           <h2 className="text-2xl font-semibold">Location:</h2>
           <LocationDropdown location={location} setLocation={setLocation} />
         </div>
-        <div className="flex gap-4">
-               <h2  className="text-2xl font-semibold">Map Type:</h2>
+        <div className="flex flex-col md:flex-row gap-2 md:gap-4">
+               <h2  className="text-2xl font-semibold whitespace-nowrap">Map Type:</h2>
           <MapTypeDropDown mapType={mapType} setMaptype={setMaptype} />
         </div>
+           <button onClick={() => setIsSidePanelOpen(true)} className="hidden xs:block "> <Hamburger className="size-6 invert ml-auto lg:hidden"/> </button>
       </div>
-    <div className="relative">
-      {/* <Map coords={coords} onMapClick={onMapClick} mapType={mapType} /> */}
-      <MapLegend mapType={mapType}/>
-    </div>
-      <Suspense fallback={<CurrentWeatherSkeleton />} >
-        <CurrentWeather coords={coords} />
-      </Suspense>
-     
-      <Suspense fallback={<HourlySkeleton />} >
-        <HourlyForecast coords={coords} />
-      </Suspense>
-      <Suspense fallback={<DailySkeleton/>}>
-        <DailyForcecast coords={coords} />
-      </Suspense>
+    <div className="grid flex-1 min-h-0 grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 2xl:grid-rows-4 gap-8">
+      <div className="relative h-120 2xl:h-auto col-span-1 md:col-span-2 2xl:col-span-4 2xl:row-span-2 order-1">
+        { <Map coords={coords} onMapClick={onMapClick} mapType={mapType} /> }
+        <MapLegend mapType={mapType}/>
+      </div>
 
-      <Suspense fallback={<AddditionalInfoSkeleton/>}>
-        <AdditionalInfo coords={coords} />
-      </Suspense>
+        <div className="col-span-1 2xl:row-span-2 order-2">
+          <Suspense fallback={<CurrentWeatherSkeleton />} >
+            <CurrentWeather coords={coords} />
+          </Suspense>
+        </div>
+
+        <div className="col-span-1 order-3 2xl:order-4 2xl:row-span-2">
+          <Suspense fallback={<DailySkeleton/>}>
+            <DailyForcecast coords={coords} />
+          </Suspense>
+        </div>
+
+        <div className="col-span-1  md:col-span-2 2xl:row-span-1 order-4 2xl:order-3">
+          <Suspense fallback={<HourlySkeleton />} >
+            <HourlyForecast coords={coords} />
+          </Suspense>
+        </div>
+      
+        <div className="col-span-1  md:col-span-2 2xl:row-span-1 order-5">
+          <Suspense fallback={<AddditionalInfoSkeleton/>}>
+            <AdditionalInfo coords={coords} />
+          </Suspense>
+        </div>
+      </div>
     </div>
-<SidePanel  coords={coords}/> 
+<SidePanel isSidePanelOpen={isSidePanelOpen} setIsSidePanelOpen={setIsSidePanelOpen} coords={coords}/> 
   </>
   )
 }

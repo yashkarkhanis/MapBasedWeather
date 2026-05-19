@@ -30,7 +30,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
+  --sidebar-width:23rem;
   @media (max-width: 1024px) {
     font-size: 16px;
   }
@@ -114,6 +114,7 @@
 }
 
 @theme inline {
+  --breakpoint-xs:500px;
   --font-heading: var(--font-sans);
   --font-sans: 'Inter Variable', sans-serif;
   --color-sidebar-ring: var(--sidebar-ring);

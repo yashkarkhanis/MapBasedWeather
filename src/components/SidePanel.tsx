@@ -1,21 +1,31 @@
 import { getAirPollution } from '@/api'
 import type { Coords } from '@/types'
 import { useSuspenseQuery } from '@tanstack/react-query'
-import React, { Suspense } from 'react'
+import  { Suspense, type Dispatch, type SetStateAction } from 'react'
 import Cards from './cards/Cards'
 import { Slider } from './ui/slider'
 import { clsx } from 'clsx'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 import Information from "/src/assets/information.svg?react"
+import Chevron from "/src/assets/ChevronLeft.svg?react"
+import { is } from 'zod/locales'
+import SidePanelSkeleton from './skeletons/SidePanelSkeleton'
 
 type Props = {
-    coords: Coords
+    coords: Coords,
+    isSidePanelOpen: boolean,
+    setIsSidePanelOpen:Dispatch<SetStateAction<boolean>>
 }
 
 export default function SidePanel(props: Props) {
-    return (
-        <div className='fixed top-0 right-0 h-screen w-90 shadow-md bg-sidebar z-1000 py-8 px-4 overflow-y-scroll'>
-            <Suspense>
+    const {isSidePanelOpen,setIsSidePanelOpen} = props
+     return (
+        <div className={clsx("fixed top-0 right-0 h-screen w-(--sidebar-width) shadow-md bg-sidebar z-1001 py-8 px-4 overflow-y-scroll transition-transform duration-300 lg:translate-x-0!",
+        isSidePanelOpen ? "translate-x-0" : "translate-x-full")}>
+            <button onClick={() => setIsSidePanelOpen(false)}>  
+                <Chevron className="size-8 invert -ml-2 lg:hidden"/>
+            </button>
+            <Suspense fallback={<SidePanelSkeleton/>}>
                 <AirPollution {...props} />
             </Suspense>
 

@@ -60,7 +60,7 @@ const rows =[
   ]
 
     return (
-    <Cards title='Additional Weather Info' childrenClassName="flex flex-col gap-8">
+    <Cards title='Additional Weather Info' childrenClassName="grid grid-cols-1 md:grid-cols-2 gap-8">
         {rows.map(({label,value,Icon})=>(
             <div className="flex justify-between" key={label}>
                 <div className='flex gap-4'>

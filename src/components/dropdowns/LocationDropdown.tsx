@@ -10,7 +10,7 @@ type Props = {
 export default function LocationDropdown({ location, setLocation }: Props) {
   return (
     <Select  value={location} onValueChange={(value) => value &&  setLocation(value)} >
-  <SelectTrigger className="w-[180px]">
+  <SelectTrigger className="xs:w-[180px] w-full">
     <SelectValue className="capitalize">
              {location}
             </SelectValue>
